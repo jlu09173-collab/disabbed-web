@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Dashboard - AbilityJobs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #008CA7 0%, #2ECC71 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .pattern-dots { background-image: radial-gradient(circle, rgba(0, 140, 167, 0.08) 1px, transparent 1px); background-size: 20px 20px; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .floating { animation: float 3s ease-in-out infinite; }
+    </style>
+</head>
+<body class="bg-[#F5F7FA]">
+    <!-- Top Bar -->
+    <div class="bg-gradient-to-r from-[#008CA7] to-[#006B82] text-white py-3 px-6 text-center text-sm font-medium">
+        <span>🏢 2,500+ Companies Hiring | 💼 15,000+ Qualified Candidates | 🎯 98% Satisfaction Rate</span>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50 border-b-2 border-[#008CA7]/10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center hover-scale">
+                    <div class="w-44 h-16 rounded-xl overflow-hidden shadow-lg hover:scale-110 transition duration-300">
+                        <img src="images/logo.png" alt="AbilityJobs Logo" class="w-full h-full object-cover">
+                    </div>
+                </a>
+                <div class="flex items-center gap-8">
+                    <a href="index.html" class="text-[#222222] hover:text-[#008CA7] font-medium transition-colors">Home</a>
+                    <a href="jobs.html" class="text-[#222222] hover:text-[#008CA7] font-medium transition-colors">Jobs</a>
+                    <a href="employer-dashboard.html" class="text-[#008CA7] font-bold border-b-3 border-[#008CA7] pb-1">Employers</a>
+                    <a href="ngos.html" class="text-[#222222] hover:text-[#008CA7] font-medium transition-colors">NGOs</a>
+                    <a href="login.html" class="text-[#222222] hover:text-[#008CA7] font-medium transition-colors">Login</a>
+                    <a href="register.html" class="bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white px-7 py-3 rounded-xl font-bold hover:shadow-2xl transition-all">Post a Job</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+  <section class="relative py-24 px-6 overflow-hidden">
+
+    <div class="absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786"
+             class="w-full h-full object-cover">
+    </div>
+
+    <div class="absolute inset-0 bg-[#008CA7]/20"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto">
+
+        <h1 class="text-5xl font-black text-[#ffffff] mb-4">
+    Welcome Back! 👋
+</h1>
+
+<p class="text-[#096933] text-xl">
+    Manage your job postings and find the perfect candidates
+</p>
+
+    </div>
+</section>
+
+    <!-- Stats Section -->
+    <section class="bg-white py-16 border-b-2 border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 text-center">
+                <div class="bg-gradient-to-br from-[#F5F7FA] to-white rounded-3xl p-8 shadow-lg border-2 border-gray-100">
+                    <div class="text-6xl font-black gradient-text mb-3">15,000+</div>
+                    <p class="text-[#222222]/70 font-bold text-lg">Qualified Candidates</p>
+                </div>
+                <div class="bg-gradient-to-br from-[#F5F7FA] to-white rounded-3xl p-8 shadow-lg border-2 border-gray-100">
+                    <div class="text-6xl font-black gradient-text mb-3">2,500+</div>
+                    <p class="text-[#222222]/70 font-bold text-lg">Active Employers</p>
+                </div>
+                <div class="bg-gradient-to-br from-[#F5F7FA] to-white rounded-3xl p-8 shadow-lg border-2 border-gray-100">
+                    <div class="text-6xl font-black gradient-text mb-3">5,000+</div>
+                    <p class="text-[#222222]/70 font-bold text-lg">Jobs Posted</p>
+                </div>
+                <div class="bg-gradient-to-br from-[#F5F7FA] to-white rounded-3xl p-8 shadow-lg border-2 border-gray-100">
+                    <div class="text-6xl font-black gradient-text mb-3">98%</div>
+                    <p class="text-[#222222]/70 font-bold text-lg">Satisfaction Rate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="bg-gradient-to-br from-[#F5F7FA] to-[#E8F4F8] py-24 px-6" id="features">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <div class="inline-block bg-[#008CA7]/10 px-5 py-2 rounded-full mb-6">
+                    <span class="text-[#008CA7] font-bold text-sm tracking-wide">WHY CHOOSE US</span>
+                </div>
+                <h2 class="text-6xl font-black text-[#222222] mb-6 leading-tight">Employer <span class="gradient-text">Benefits</span></h2>
+                <p class="text-xl text-[#222222]/70 max-w-3xl mx-auto font-medium">Everything you need to find and hire the right talent</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="bg-white rounded-3xl shadow-xl p-10 hover:shadow-2xl transition-all border-t-4 border-[#008CA7]">
+                    <div class="bg-gradient-to-br from-[#008CA7] to-[#006B82] w-20 h-20 rounded-3xl flex items-center justify-center mb-8 shadow-xl">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#222222] mb-4">AI Smart Matching</h3>
+                    <p class="text-[#222222]/70 leading-relaxed text-lg">Advanced algorithm matches job requirements with the most qualified candidates based on skills and experience</p>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-xl p-10 hover:shadow-2xl transition-all border-t-4 border-[#2ECC71]">
+                    <div class="bg-gradient-to-br from-[#2ECC71] to-[#27ae60] w-20 h-20 rounded-3xl flex items-center justify-center mb-8 shadow-xl">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#222222] mb-4">Verified Profiles</h3>
+                    <p class="text-[#222222]/70 leading-relaxed text-lg">All candidates verified with background checks and skill assessments for your peace of mind</p>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-xl p-10 hover:shadow-2xl transition-all border-t-4 border-[#008CA7]">
+                    <div class="bg-gradient-to-br from-[#008CA7] to-[#006B82] w-20 h-20 rounded-3xl flex items-center justify-center mb-8 shadow-xl">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#222222] mb-4">Quick Hiring</h3>
+                    <p class="text-[#222222]/70 leading-relaxed text-lg">Streamlined recruitment workflow - find and hire candidates in as little as 7 days</p>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-xl p-10 hover:shadow-2xl transition-all border-t-4 border-[#2ECC71]">
+                    <div class="bg-gradient-to-br from-[#2ECC71] to-[#27ae60] w-20 h-20 rounded-3xl flex items-center justify-center mb-8 shadow-xl">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#222222] mb-4">Advanced Analytics</h3>
+                    <p class="text-[#222222]/70 leading-relaxed text-lg">Track applications, candidate engagement, and hiring metrics with comprehensive dashboard</p>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-xl p-10 hover:shadow-2xl transition-all border-t-4 border-[#008CA7]">
+                    <div class="bg-gradient-to-br from-[#008CA7] to-[#006B82] w-20 h-20 rounded-3xl flex items-center justify-center mb-8 shadow-xl">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#222222] mb-4">Diversity Compliance</h3>
+                    <p class="text-[#222222]/70 leading-relaxed text-lg">Meet diversity hiring goals with detailed reporting and compliance support</p>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-xl p-10 hover:shadow-2xl transition-all border-t-4 border-[#2ECC71]">
+                    <div class="bg-gradient-to-br from-[#2ECC71] to-[#27ae60] w-20 h-20 rounded-3xl flex items-center justify-center mb-8 shadow-xl">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#222222] mb-4">24/7 Support</h3>
+                    <p class="text-[#222222]/70 leading-relaxed text-lg">Personalized assistance from hiring experts and disability inclusion consultants</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section class="bg-white py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <div class="inline-block bg-[#2ECC71]/10 px-5 py-2 rounded-full mb-6">
+                    <span class="text-[#2ECC71] font-bold text-sm tracking-wide">SIMPLE PROCESS</span>
+                </div>
+                <h2 class="text-6xl font-black text-[#222222] mb-6">How It <span class="gradient-text">Works</span></h2>
+                <p class="text-xl text-[#222222]/70 max-w-3xl mx-auto font-medium">Start hiring inclusive talent in 4 simple steps</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="bg-gradient-to-br from-[#008CA7] to-[#2ECC71] w-24 h-24 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl">
+                        <span class="text-white text-4xl font-black">1</span>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#222222] mb-4">Create Account</h3>
+                    <p class="text-[#222222]/70 text-lg leading-relaxed">Sign up and verify your company profile in minutes</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="bg-gradient-to-br from-[#008CA7] to-[#2ECC71] w-24 h-24 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl">
+                        <span class="text-white text-4xl font-black">2</span>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#222222] mb-4">Post Job</h3>
+                    <p class="text-[#222222]/70 text-lg leading-relaxed">Create detailed listings with accessibility requirements</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="bg-gradient-to-br from-[#008CA7] to-[#2ECC71] w-24 h-24 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl">
+                        <span class="text-white text-4xl font-black">3</span>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#222222] mb-4">Review Applicants</h3>
+                    <p class="text-[#222222]/70 text-lg leading-relaxed">Browse qualified candidates matched to your position</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="bg-gradient-to-br from-[#008CA7] to-[#2ECC71] w-24 h-24 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl">
+                        <span class="text-white text-4xl font-black">4</span>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#222222] mb-4">Hire Talent</h3>
+                    <p class="text-[#222222]/70 text-lg leading-relaxed">Interview and onboard the perfect candidate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="bg-gradient-to-br from-[#F5F7FA] to-[#E8F4F8] py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <div class="inline-block bg-[#008CA7]/10 px-5 py-2 rounded-full mb-6">
+                    <span class="text-[#008CA7] font-bold text-sm tracking-wide">PRICING PLANS</span>
+                </div>
+                <h2 class="text-6xl font-black text-[#222222] mb-6">Choose Your <span class="gradient-text">Plan</span></h2>
+                <p class="text-xl text-[#222222]/70 max-w-3xl mx-auto font-medium">Flexible pricing for businesses of all sizes</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Starter Plan -->
+                <div class="bg-white rounded-3xl shadow-xl p-10 border-2 border-gray-200 hover:border-[#008CA7] transition-all">
+                    <h3 class="text-3xl font-black text-[#222222] mb-2">Starter</h3>
+                    <p class="text-[#222222]/60 mb-8 text-lg">For small businesses</p>
+                    <div class="mb-8">
+                        <span class="text-6xl font-black text-[#222222]">Free</span>
+                    </div>
+                    <button class="w-full h-16 bg-white border-3 border-[#008CA7] text-[#008CA7] rounded-2xl font-black text-lg hover:bg-[#008CA7] hover:text-white transition-all mb-8">
+                        Get Started
+                    </button>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-7 h-7 text-[#2ECC71] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-[#222222]/80 text-lg">Post up to 3 jobs/month</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-7 h-7 text-[#2ECC71] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-[#222222]/80 text-lg">Basic candidate matching</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-7 h-7 text-[#2ECC71] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-[#222222]/80 text-lg">Email support</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="bg-gradient-to-br from-[#008CA7] to-[#2ECC71] rounded-3xl shadow-2xl p-10 text-white transform scale-105 relative">
+                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-orange-500 text-white px-6 py-2 rounded-full text-sm font-black shadow-lg">
+                        POPULAR
+                    </div>
+                    <h3 class="text-3xl font-black mb-2">Professional</h3>
+                    <p class="text-white/90 mb-8 text-lg">For growing companies</p>
+                    <div class="mb-8">
+                        <span class="text-6xl font-black">₹4,999</span>
+                        <span class="text-white/80 text-lg">/month</span>
+                    </div>
+                    <button class="w-full h-16 bg-white text-[#008CA7] rounded-2xl font-black text-lg hover:bg-[#F5F7FA] transition-all shadow-xl mb-8">
+                        Get Started
+                    </button>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-7 h-7 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-lg">Unlimited job postings</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-7 h-7 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-lg">AI-powered matching</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-7 h-7 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-lg">Priority 24/7 support</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-7 h-7 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-lg">Advanced analytics</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="bg-white rounded-3xl shadow-xl p-10 border-2 border-gray-200 hover:border-[#008CA7] transition-all">
+                    <h3 class="text-3xl font-black text-[#222222] mb-2">Enterprise</h3>
+                    <p class="text-[#222222]/60 mb-8 text-lg">For large organizations</p>
+                    <div class="mb-8">
+                        <span class="text-6xl font-black text-[#222222]">Custom</span>
+                    </div>
+                    <button class="w-full h-16 bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white rounded-2xl font-black text-lg hover:shadow-xl transition-all mb-8">
+                        Contact Sales
+                    </button>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-7 h-7 text-[#2ECC71] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-[#222222]/80 text-lg">All Professional features</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-7 h-7 text-[#2ECC71] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-[#222222]/80 text-lg">Custom integrations</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-7 h-7 text-[#2ECC71] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-[#222222]/80 text-lg">Dedicated manager</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-gradient-to-br from-[#008CA7] via-[#00a8c9] to-[#2ECC71] py-24 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 pattern-dots opacity-20"></div>
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <h2 class="text-6xl font-black text-white mb-8 leading-tight">Ready to Build an Inclusive Team?</h2>
+            <p class="text-2xl text-white/95 mb-12 max-w-3xl mx-auto font-medium leading-relaxed">Join 2,500+ forward-thinking companies hiring diverse talent through AbilityJobs</p>
+            <div class="flex gap-6 justify-center flex-wrap">
+                <a href="register.html" class="bg-white text-[#008CA7] px-12 py-5 rounded-2xl text-xl font-black hover:bg-[#F5F7FA] transition-all shadow-2xl">
+                    Post Your First Job →
+                </a>
+                <a href="#" class="bg-white/10 backdrop-blur-xl border-2 border-white text-white px-12 py-5 rounded-2xl text-xl font-bold hover:bg-white hover:text-[#008CA7] transition-all">
+                    Schedule a Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-[#1a1a1a] to-[#2d2d2d] text-white py-16 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-gradient-to-br from-[#008CA7] to-[#2ECC71] w-12 h-12 rounded-xl flex items-center justify-center shadow-xl">
+                            <span class="text-white font-bold text-xl">AJ</span>
+                        </div>
+                        <span class="text-3xl font-black">AbilityJobs</span>
+                    </div>
+                    <p class="text-white/80 leading-relaxed text-lg">Empowering specially-abled individuals to find meaningful careers.</p>
+                </div>
+                <div>
+                    <h3 class="font-black text-xl mb-6 text-[#2ECC71]">Quick Links</h3>
+                    <div class="flex flex-col gap-4">
+                        <a href="index.html" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ Home</a>
+                        <a href="jobs.html" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ Browse Jobs</a>
+                        <a href="ngos.html" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ NGO Partners</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-black text-xl mb-6 text-[#2ECC71]">Support</h3>
+                    <div class="flex flex-col gap-4">
+                        <a href="#" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ Help Center</a>
+                        <a href="#" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ Privacy Policy</a>
+                        <a href="#" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ Accessibility</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-black text-xl mb-6 text-[#2ECC71]">Contact</h3>
+                    <div class="flex flex-col gap-4 text-white/80 text-lg">
+                        <p>📧 employers@abilityjobs.com</p>
+                        <p>📞 1800-XXX-XXXX</p>
+                        <p>🕒 Mon-Sat: 9AM - 6PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t-2 border-white/10 pt-8 text-center">
+                <p class="text-white/70 text-lg">© 2026 AbilityJobs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

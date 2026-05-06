@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - AbilityJobs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #008CA7 0%, #2ECC71 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .pattern-dots { background-image: radial-gradient(circle, rgba(0, 140, 167, 0.08) 1px, transparent 1px); background-size: 20px 20px; }
+        .file-input { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+    </style>
+</head>
+<body class="bg-[#F5F7FA]">
+    <nav class="bg-white shadow-lg border-b-2 border-[#008CA7]/10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center">
+                    <div class="w-44 h-16 rounded-xl overflow-hidden shadow-lg">
+                        <img src="images/logo.png" alt="AbilityJobs Logo" class="w-full h-full object-cover">
+                    </div>
+                </a>
+                <div class="flex items-center gap-8">
+                    <a href="index.html" class="text-[#222222] hover:text-[#008CA7] font-medium">Home</a>
+                    <a href="jobs.html" class="text-[#222222] hover:text-[#008CA7] font-medium">Jobs</a>
+                    <a href="login.html" class="text-[#222222] hover:text-[#008CA7] font-medium">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pattern-dots">
+        <section class="relative min-h-[420px] flex items-center overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1920&q=80" alt="Candidate creating profile" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#008CA7]/85 to-[#2ECC71]/60"></div>
+            <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 text-white">
+                <p class="font-black mb-4">Naukri-style candidate onboarding</p>
+                <h1 class="text-5xl lg:text-7xl font-black mb-6">Create a searchable profile.</h1>
+                <p class="text-xl lg:text-2xl text-white/90 max-w-3xl">Verify email/mobile, upload resume, add skills and preferences, then track your profile completion score.</p>
+            </div>
+        </section>
+
+        <section class="max-w-6xl mx-auto px-6 py-12">
+            <div class="bg-white rounded-3xl shadow-xl p-6 md:p-8 mb-8 border-2 border-gray-100">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="p-4 rounded-2xl bg-[#008CA7]/10 border-2 border-[#008CA7]/20"><b>1. Type</b><p class="text-sm text-[#222222]/70">Fresher or experienced</p></div>
+                    <div class="p-4 rounded-2xl bg-[#2ECC71]/10 border-2 border-[#2ECC71]/20"><b>2. Account</b><p class="text-sm text-[#222222]/70">Email, mobile, password</p></div>
+                    <div class="p-4 rounded-2xl bg-[#008CA7]/10 border-2 border-[#008CA7]/20"><b>3. OTP</b><p class="text-sm text-[#222222]/70">Verify contact details</p></div>
+                    <div class="p-4 rounded-2xl bg-[#2ECC71]/10 border-2 border-[#2ECC71]/20"><b>4. Profile</b><p class="text-sm text-[#222222]/70">Resume, skills, preferences</p></div>
+                </div>
+            </div>
+
+            {% if messages %}
+                <div class="space-y-3 mb-6">
+                    {% for message in messages %}
+                        <div class="rounded-2xl px-5 py-4 font-bold bg-[#008CA7]/10 text-[#006B82] border-2 border-[#008CA7]/20">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if form.errors %}
+                <div class="rounded-2xl px-5 py-4 mb-6 bg-red-50 text-red-700 border-2 border-red-100 font-bold">
+                    <p class="mb-2">Please fix these fields:</p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        {% for field, errors in form.errors.items %}
+                            <li><span class="capitalize">{{ field|cut:"_" }}</span>: {{ errors|striptags }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <form id="registerForm" method="post" enctype="multipart/form-data" class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border-2 border-gray-100 space-y-10">
+                {% csrf_token %}
+                <section>
+                    <h2 class="text-3xl font-black text-[#222222] mb-6">Continue with</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <button type="button" class="h-16 border-2 border-gray-200 rounded-2xl hover:border-[#008CA7] hover:bg-[#008CA7]/5 transition-all flex items-center justify-center gap-3 font-black text-lg text-[#222222]">
+                            <span class="text-[#4285F4] text-2xl font-black">G</span>
+                            Continue with Google
+                        </button>
+                        <button type="button" class="h-16 border-2 border-gray-200 rounded-2xl hover:border-[#008CA7] hover:bg-[#008CA7]/5 transition-all flex items-center justify-center gap-3 font-black text-lg text-[#222222]">
+                            <span class="text-[#0A66C2] text-2xl font-black">in</span>
+                            Continue with LinkedIn
+                        </button>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-3xl font-black text-[#222222] mb-6">1. Candidate Type</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="user_type" value="fresher" class="peer sr-only" {% if form.user_type.value != 'experienced' %}checked{% endif %}>
+                            <div class="h-32 border-2 border-gray-200 rounded-2xl p-6 peer-checked:border-[#008CA7] peer-checked:bg-[#008CA7]/5">
+                                <h3 class="text-2xl font-black text-[#222222]">Fresher</h3>
+                                <p class="text-[#222222]/70">Resume and education-led matching.</p>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="user_type" value="experienced" class="peer sr-only" {% if form.user_type.value == 'experienced' %}checked{% endif %}>
+                            <div class="h-32 border-2 border-gray-200 rounded-2xl p-6 peer-checked:border-[#2ECC71] peer-checked:bg-[#2ECC71]/5">
+                                <h3 class="text-2xl font-black text-[#222222]">Experienced</h3>
+                                <p class="text-[#222222]/70">Employment history and notice period included.</p>
+                            </div>
+                        </label>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-3xl font-black text-[#222222] mb-6">2. Basic Account Information</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input name="first_name" required value="{{ form.first_name.value|default:'' }}" class="h-16 px-5 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#008CA7] outline-none text-lg" placeholder="First name">
+                        <input name="last_name" value="{{ form.last_name.value|default:'' }}" class="h-16 px-5 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#008CA7] outline-none text-lg" placeholder="Last name">
+                        <input name="email" type="email" required value="{{ form.email.value|default:'' }}" class="h-16 px-5 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#008CA7] outline-none text-lg" placeholder="Email ID">
+                        <input name="phone" required value="{{ form.phone.value|default:'' }}" class="h-16 px-5 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#008CA7] outline-none text-lg" placeholder="Mobile number">
+                        <input name="password" type="password" required class="h-16 px-5 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#008CA7] outline-none text-lg" placeholder="Password">
+                        <input name="confirm_password" type="password" required class="h-16 px-5 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-[#008CA7] outline-none text-lg" placeholder="Confirm password">
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-3xl font-black text-[#222222] mb-6">3. Resume and Profile Data</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-[180px_1fr] gap-5 items-center p-5 rounded-2xl border-2 border-[#008CA7]/20 bg-[#008CA7]/5">
+                            <div class="w-32 h-32 rounded-full bg-white border-2 border-[#008CA7]/20 flex items-center justify-center text-[#008CA7] font-black text-4xl shadow-lg">Photo</div>
+                            <div>
+                                <p class="text-lg font-black text-[#222222] mb-2">Upload Profile Photo</p>
+                                <p class="text-[#222222]/60 font-medium mb-4">Add a clear candidate photo for your dashboard and recruiter profile.</p>
+                                <label class="inline-flex items-center justify-center h-14 px-6 rounded-2xl bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white font-black cursor-pointer hover:shadow-xl transition-all">
+                                    Upload Profile Photo
+                                    <input name="profile_photo" type="file" accept="image/*" class="file-input" data-file-label="profilePhotoName">
+                                </label>
+                                <span id="profilePhotoName" class="ml-4 text-[#222222]/60 font-bold">No photo selected</span>
+                            </div>
+                        </div>
+                        <input name="current_location" value="{{ form.current_location.value|default:'' }}" class="h-16 px-5 border-2 border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-[#008CA7] text-lg" placeholder="Current location">
+                        <input name="preferred_location" value="{{ form.preferred_location.value|default:'' }}" class="h-16 px-5 border-2 border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-[#008CA7] text-lg" placeholder="Preferred location">
+                        <select name="disability" class="h-16 px-5 border-2 border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-[#008CA7] text-lg bg-white">
+                            <option value="">Select disability type</option>
+                            <option value="prefer_not_to_say" {% if form.disability.value == 'prefer_not_to_say' %}selected{% endif %}>Prefer not to say</option>
+                            <option value="visual" {% if form.disability.value == 'visual' %}selected{% endif %}>Visual impairment</option>
+                            <option value="hearing" {% if form.disability.value == 'hearing' %}selected{% endif %}>Hearing impairment</option>
+                            <option value="physical" {% if form.disability.value == 'physical' %}selected{% endif %}>Physical disability</option>
+                            <option value="speech" {% if form.disability.value == 'speech' %}selected{% endif %}>Speech impairment</option>
+                            <option value="learning" {% if form.disability.value == 'learning' %}selected{% endif %}>Learning disability</option>
+                            <option value="mental_health" {% if form.disability.value == 'mental_health' %}selected{% endif %}>Mental health condition</option>
+                            <option value="multiple" {% if form.disability.value == 'multiple' %}selected{% endif %}>Multiple disabilities</option>
+                            <option value="other" {% if form.disability.value == 'other' %}selected{% endif %}>Other</option>
+                        </select>
+                        <div class="h-16 px-5 border-2 border-gray-200 rounded-2xl flex items-center gap-4 bg-white">
+                            <label class="inline-flex items-center justify-center h-11 px-5 rounded-xl bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white font-black cursor-pointer hover:shadow-lg transition-all">
+                                Upload Resume
+                                <input name="resume" type="file" accept=".pdf,.doc,.docx" class="file-input" data-file-label="resumeFileName">
+                            </label>
+                            <span id="resumeFileName" class="text-[#222222]/60 font-bold truncate">No resume selected</span>
+                        </div>
+                        <textarea name="education" rows="3" class="md:col-span-2 px-5 py-4 border-2 border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-[#008CA7] text-lg" placeholder="Education details">{{ form.education.value|default:'' }}</textarea>
+                        <textarea name="employment_history" rows="3" class="md:col-span-2 px-5 py-4 border-2 border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-[#008CA7] text-lg" placeholder="Employment history (required for experienced candidates)">{{ form.employment_history.value|default:'' }}</textarea>
+                        <textarea name="skills" rows="3" class="md:col-span-2 px-5 py-4 border-2 border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-[#008CA7] text-lg" placeholder="Skills and keywords, e.g. Excel, communication, Python">{{ form.skills.value|default:'' }}</textarea>
+                    </div>
+                </section>
+
+                <section class="bg-gradient-to-br from-[#F5F7FA] to-[#E8F4F8] rounded-2xl p-6 border-2 border-[#008CA7]/20 space-y-4">
+                    <label class="flex items-start gap-4 font-medium text-[#222222]/85"><input type="checkbox" name="hide_from_recruiters" class="w-6 h-6 mt-1"> Hide my profile from recruiters for now</label>
+                    <label class="flex items-start gap-4 font-medium text-[#222222]/85"><input type="checkbox" name="job_alerts" class="w-6 h-6 mt-1" checked> Send job recommendations and profile alerts</label>
+                    <label class="flex items-start gap-4 font-medium text-[#222222]/85"><input type="checkbox" name="terms" required class="w-6 h-6 mt-1"> I agree to the Terms and Privacy Policy</label>
+                </section>
+
+                <button type="submit" class="w-full h-16 bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white rounded-2xl font-black text-xl hover:shadow-2xl transition-all">Create Account and Send OTP</button>
+                <p class="text-center text-[#222222]/70 text-lg">Already have an account? <a href="login.html" class="text-[#008CA7] hover:text-[#2ECC71] font-black">Sign In</a></p>
+            </form>
+        </section>
+    </main>
+    <script>
+        document.querySelectorAll('input[type="file"][data-file-label]').forEach((input) => {
+            input.addEventListener('change', () => {
+                const label = document.getElementById(input.dataset.fileLabel);
+                label.textContent = input.files.length ? input.files[0].name : label.id === 'resumeFileName' ? 'No resume selected' : 'No photo selected';
+            });
+        });
+    </script>
+</body>
+</html>

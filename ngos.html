@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Partners - AbilityJobs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #008CA7 0%, #2ECC71 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .pattern-dots { background-image: radial-gradient(circle, rgba(0, 140, 167, 0.08) 1px, transparent 1px); background-size: 20px 20px; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .floating { animation: float 3s ease-in-out infinite; }
+    </style>
+</head>
+<body class="bg-[#F5F7FA]">
+    <!-- Top Bar -->
+    <div class="bg-gradient-to-r from-[#008CA7] to-[#006B82] text-white py-3 px-6 text-center text-sm font-medium">
+        <span>🤝 150+ Partner NGOs | 💚 12,000+ Lives Impacted | 🎯 8,500+ Successful Placements</span>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50 border-b-2 border-[#008CA7]/10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center hover-scale">
+                    <div class="w-44 h-16 rounded-xl overflow-hidden shadow-lg hover:scale-110 transition duration-300">
+                        <img src="images/logo.png" alt="AbilityJobs Logo" class="w-full h-full object-cover">
+                    </div>
+                </a>
+                <div class="flex items-center gap-8">
+                    <a href="index.html" class="text-[#222222] hover:text-[#008CA7] font-medium transition-colors">Home</a>
+                    <a href="jobs.html" class="text-[#222222] hover:text-[#008CA7] font-medium transition-colors">Jobs</a>
+                    <a href="employer-dashboard.html" class="text-[#222222] hover:text-[#008CA7] font-medium transition-colors">Employers</a>
+                    <a href="ngos.html" class="text-[#008CA7] font-bold border-b-3 border-[#008CA7] pb-1">NGOs</a>
+                    <a href="login.html" class="text-[#222222] hover:text-[#008CA7] font-medium transition-colors">Login</a>
+                    <a href="register.html" class="bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white px-7 py-3 rounded-xl font-bold hover:shadow-2xl transition-all">Partner With Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative py-24 px-6 overflow-hidden">
+
+    <div class="absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
+             class="w-full h-full object-cover">
+    </div>
+
+    <div class="absolute inset-0 bg-[#008CA7]/20"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10 text-center">
+
+        <h1 class="text-6xl font-black text-white mb-6">
+            NGO <span class="text-[#2ECC71]">Partnerships</span>
+        </h1>
+
+        <p class="text-xl text-white/90">
+            Empowering specially-abled individuals together
+        </p>
+
+    </div>
+</section>
+    <!-- Impact Stats -->
+    <section class="bg-white py-16 border-b-2 border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
+                <div class="bg-gradient-to-br from-[#F5F7FA] to-white rounded-3xl p-8 shadow-lg border-2 border-gray-100">
+                    <div class="text-6xl font-black gradient-text mb-3">150+</div>
+                    <p class="text-[#222222]/70 font-bold text-lg">Partner NGOs</p>
+                </div>
+                <div class="bg-gradient-to-br from-[#F5F7FA] to-white rounded-3xl p-8 shadow-lg border-2 border-gray-100">
+                    <div class="text-6xl font-black gradient-text mb-3">12K+</div>
+                    <p class="text-[#222222]/70 font-bold text-lg">Lives Impacted</p>
+                </div>
+                <div class="bg-gradient-to-br from-[#F5F7FA] to-white rounded-3xl p-8 shadow-lg border-2 border-gray-100">
+                    <div class="text-6xl font-black gradient-text mb-3">8.5K+</div>
+                    <p class="text-[#222222]/70 font-bold text-lg">Placements</p>
+                </div>
+                <div class="bg-gradient-to-br from-[#F5F7FA] to-white rounded-3xl p-8 shadow-lg border-2 border-gray-100">
+                    <div class="text-6xl font-black gradient-text mb-3">45+</div>
+                    <p class="text-[#222222]/70 font-bold text-lg">Cities Covered</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="bg-gradient-to-br from-[#F5F7FA] to-[#E8F4F8] py-24 px-6" id="impact">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div class="order-2 lg:order-1 relative">
+                    <div class="absolute -top-6 -left-6 w-72 h-72 bg-[#008CA7]/10 rounded-full blur-3xl"></div>
+                    <img src="https://images.unsplash.com/photo-1758691737492-48e8fdd336f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGVtcGxveWVlcyUyMHRlYW0lMjBkaXZlcnNpdHl8ZW58MXx8fHwxNzczODA2NTYzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" alt="Team Collaboration" class="rounded-3xl shadow-2xl border-8 border-white relative z-10">
+                </div>
+                <div class="order-1 lg:order-2">
+                    <div class="inline-block bg-[#008CA7]/10 px-5 py-2 rounded-full mb-6">
+                        <span class="text-[#008CA7] font-bold text-sm tracking-wide">OUR MISSION</span>
+                    </div>
+                    <h2 class="text-6xl font-black text-[#222222] mb-8 leading-tight">Empowering Through <span class="gradient-text">Collaboration</span></h2>
+                    <p class="text-xl text-[#222222]/80 leading-relaxed mb-8 font-medium">
+                        AbilityJobs partners with NGOs to create a comprehensive ecosystem that supports specially-abled individuals throughout their career journey - from skill development to job placement and beyond.
+                    </p>
+                    <div class="space-y-5">
+                        <div class="flex items-start gap-5 bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all">
+                            <div class="bg-gradient-to-br from-[#2ECC71] to-[#27ae60] w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                                <span class="text-white text-2xl font-bold">✓</span>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-[#222222] mb-2 text-xl">Training & Skill Development</h4>
+                                <p class="text-[#222222]/70 text-lg">Access to industry-relevant training programs and certifications</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-5 bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all">
+                            <div class="bg-gradient-to-br from-[#008CA7] to-[#006B82] w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                                <span class="text-white text-2xl font-bold">✓</span>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-[#222222] mb-2 text-xl">Career Counseling</h4>
+                                <p class="text-[#222222]/70 text-lg">Professional guidance and mentorship for job seekers</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-5 bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all">
+                            <div class="bg-gradient-to-br from-[#2ECC71] to-[#27ae60] w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                                <span class="text-white text-2xl font-bold">✓</span>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-[#222222] mb-2 text-xl">Placement Support</h4>
+                                <p class="text-[#222222]/70 text-lg">Direct connections to verified inclusive employers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="bg-white py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <div class="inline-block bg-[#2ECC71]/10 px-5 py-2 rounded-full mb-6">
+                    <span class="text-[#2ECC71] font-bold text-sm tracking-wide">PARTNERSHIP BENEFITS</span>
+                </div>
+                <h2 class="text-6xl font-black text-[#222222] mb-6 leading-tight">What <span class="gradient-text">We Offer</span></h2>
+                <p class="text-xl text-[#222222]/70 max-w-3xl mx-auto font-medium">Comprehensive support to amplify your impact</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="bg-gradient-to-br from-[#F5F7FA] to-white rounded-3xl shadow-xl p-10 hover:shadow-2xl transition-all border-t-4 border-[#008CA7]">
+                    <div class="bg-gradient-to-br from-[#008CA7] to-[#006B82] w-20 h-20 rounded-3xl flex items-center justify-center mb-8 shadow-xl">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#222222] mb-4">Free Training Resources</h3>
+                    <p class="text-[#222222]/70 leading-relaxed text-lg">Access comprehensive library of training materials, courses, and certifications at no cost</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-[#F5F7FA] to-white rounded-3xl shadow-xl p-10 hover:shadow-2xl transition-all border-t-4 border-[#2ECC71]">
+                    <div class="bg-gradient-to-br from-[#2ECC71] to-[#27ae60] w-20 h-20 rounded-3xl flex items-center justify-center mb-8 shadow-xl">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#222222] mb-4">Dedicated Support</h3>
+                    <p class="text-[#222222]/70 leading-relaxed text-lg">Work with dedicated account manager who understands your mission</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-[#F5F7FA] to-white rounded-3xl shadow-xl p-10 hover:shadow-2xl transition-all border-t-4 border-[#008CA7]">
+                    <div class="bg-gradient-to-br from-[#008CA7] to-[#006B82] w-20 h-20 rounded-3xl flex items-center justify-center mb-8 shadow-xl">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#222222] mb-4">Impact Analytics</h3>
+                    <p class="text-[#222222]/70 leading-relaxed text-lg">Track beneficiaries' progress with detailed analytics and generate reports</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-[#F5F7FA] to-white rounded-3xl shadow-xl p-10 hover:shadow-2xl transition-all border-t-4 border-[#2ECC71]">
+                    <div class="bg-gradient-to-br from-[#2ECC71] to-[#27ae60] w-20 h-20 rounded-3xl flex items-center justify-center mb-8 shadow-xl">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#222222] mb-4">Employer Network</h3>
+                    <p class="text-[#222222]/70 leading-relaxed text-lg">Direct access to 2,500+ verified inclusive employers actively hiring</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-[#F5F7FA] to-white rounded-3xl shadow-xl p-10 hover:shadow-2xl transition-all border-t-4 border-[#008CA7]">
+                    <div class="bg-gradient-to-br from-[#008CA7] to-[#006B82] w-20 h-20 rounded-3xl flex items-center justify-center mb-8 shadow-xl">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#222222] mb-4">Marketing Support</h3>
+                    <p class="text-[#222222]/70 leading-relaxed text-lg">Feature your organization on our platform and reach wider audience</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-[#F5F7FA] to-white rounded-3xl shadow-xl p-10 hover:shadow-2xl transition-all border-t-4 border-[#2ECC71]">
+                    <div class="bg-gradient-to-br from-[#2ECC71] to-[#27ae60] w-20 h-20 rounded-3xl flex items-center justify-center mb-8 shadow-xl">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#222222] mb-4">Grant Opportunities</h3>
+                    <p class="text-[#222222]/70 leading-relaxed text-lg">Participate in grant programs to support NGO initiatives and scale impact</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Partner -->
+    <section class="bg-gradient-to-br from-[#F5F7FA] to-[#E8F4F8] py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <div class="inline-block bg-[#008CA7]/10 px-5 py-2 rounded-full mb-6">
+                    <span class="text-[#008CA7] font-bold text-sm tracking-wide">GET STARTED</span>
+                </div>
+                <h2 class="text-6xl font-black text-[#222222] mb-6 leading-tight">How to <span class="gradient-text">Partner</span></h2>
+                <p class="text-xl text-[#222222]/70 max-w-3xl mx-auto font-medium">Join our network in 3 simple steps</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="text-center">
+                    <div class="bg-gradient-to-br from-[#008CA7] to-[#2ECC71] w-28 h-28 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl">
+                        <span class="text-white text-5xl font-black">1</span>
+                    </div>
+                    <h3 class="text-3xl font-black text-[#222222] mb-4">Register Your NGO</h3>
+                    <p class="text-[#222222]/70 leading-relaxed text-lg">Fill partnership application form with organization details and credentials</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="bg-gradient-to-br from-[#008CA7] to-[#2ECC71] w-28 h-28 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl">
+                        <span class="text-white text-5xl font-black">2</span>
+                    </div>
+                    <h3 class="text-3xl font-black text-[#222222] mb-4">Verification Process</h3>
+                    <p class="text-[#222222]/70 leading-relaxed text-lg">Our team reviews and verifies your NGO's registration and track record</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="bg-gradient-to-br from-[#008CA7] to-[#2ECC71] w-28 h-28 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl">
+                        <span class="text-white text-5xl font-black">3</span>
+                    </div>
+                    <h3 class="text-3xl font-black text-[#222222] mb-4">Start Collaborating</h3>
+                    <p class="text-[#222222]/70 leading-relaxed text-lg">Access our platform, resources, and start making impact immediately</p>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <a href="register.html" class="inline-block bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white px-12 py-5 rounded-2xl text-xl font-black hover:shadow-2xl transition-all">
+                    Apply for Partnership →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="bg-gradient-to-br from-[#008CA7] via-[#00a8c9] to-[#2ECC71] py-24 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 pattern-dots opacity-20"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-20">
+                <h2 class="text-6xl font-black text-white mb-6">Success Stories</h2>
+                <p class="text-2xl text-white/95 max-w-3xl mx-auto font-medium">Real impact through collaborative efforts</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="bg-white/15 backdrop-blur-xl border-2 border-white/30 rounded-3xl p-10 text-white hover:bg-white/20 transition-all">
+                    <div class="flex gap-2 mb-6">
+                        <span class="text-3xl">⭐</span>
+                        <span class="text-3xl">⭐</span>
+                        <span class="text-3xl">⭐</span>
+                        <span class="text-3xl">⭐</span>
+                        <span class="text-3xl">⭐</span>
+                    </div>
+                    <p class="text-xl mb-8 italic leading-relaxed font-medium">"AbilityJobs transformed how we connect beneficiaries with employment opportunities. The platform is intuitive and support team is exceptional. We've placed over 200 candidates this year!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center font-black text-2xl border-2 border-white/50">SS</div>
+                        <div>
+                            <h4 class="font-bold text-xl">Suresh Sharma</h4>
+                            <p class="text-white/80">Director, Enable Society</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white/15 backdrop-blur-xl border-2 border-white/30 rounded-3xl p-10 text-white hover:bg-white/20 transition-all">
+                    <div class="flex gap-2 mb-6">
+                        <span class="text-3xl">⭐</span>
+                        <span class="text-3xl">⭐</span>
+                        <span class="text-3xl">⭐</span>
+                        <span class="text-3xl">⭐</span>
+                        <span class="text-3xl">⭐</span>
+                    </div>
+                    <p class="text-xl mb-8 italic leading-relaxed font-medium">"The analytics dashboard helps us track impact and report to stakeholders. Free training resources have been invaluable for skill development programs. Highly recommend!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center font-black text-2xl border-2 border-white/50">MG</div>
+                        <div>
+                            <h4 class="font-bold text-xl">Meera Gupta</h4>
+                            <p class="text-white/80">Founder, Reach India</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-white py-24 px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="text-6xl font-black text-[#222222] mb-8 leading-tight">Ready to Make an Impact <span class="gradient-text">Together</span>?</h2>
+            <p class="text-2xl text-[#222222]/70 mb-12 max-w-3xl mx-auto font-medium leading-relaxed">Join 150+ NGOs partnering with AbilityJobs to create meaningful employment opportunities</p>
+            <div class="flex gap-6 justify-center flex-wrap">
+                <a href="register.html" class="bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white px-12 py-5 rounded-2xl text-xl font-black hover:shadow-2xl transition-all">
+                    Become a Partner NGO →
+                </a>
+                <a href="mailto:partnerships@abilityjobs.com" class="bg-white border-3 border-[#008CA7] text-[#008CA7] px-12 py-5 rounded-2xl text-xl font-black hover:bg-[#008CA7] hover:text-white transition-all shadow-lg">
+                    Contact Partnership Team
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-[#1a1a1a] to-[#2d2d2d] text-white py-16 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-gradient-to-br from-[#008CA7] to-[#2ECC71] w-12 h-12 rounded-xl flex items-center justify-center shadow-xl">
+                            <span class="text-white font-bold text-xl">AJ</span>
+                        </div>
+                        <span class="text-3xl font-black">AbilityJobs</span>
+                    </div>
+                    <p class="text-white/80 leading-relaxed text-lg">Empowering specially-abled individuals to find meaningful careers.</p>
+                </div>
+                <div>
+                    <h3 class="font-black text-xl mb-6 text-[#2ECC71]">Quick Links</h3>
+                    <div class="flex flex-col gap-4">
+                        <a href="index.html" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ Home</a>
+                        <a href="jobs.html" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ Browse Jobs</a>
+                        <a href="employer-dashboard.html" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ For Employers</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-black text-xl mb-6 text-[#2ECC71]">Support</h3>
+                    <div class="flex flex-col gap-4">
+                        <a href="#" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ Help Center</a>
+                        <a href="#" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ Privacy Policy</a>
+                        <a href="#" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ Accessibility</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-black text-xl mb-6 text-[#2ECC71]">Contact</h3>
+                    <div class="flex flex-col gap-4 text-white/80 text-lg">
+                        <p>📧 ngos@abilityjobs.com</p>
+                        <p>📞 1800-XXX-XXXX</p>
+                        <p>🕒 Mon-Sat: 9AM - 6PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t-2 border-white/10 pt-8 text-center">
+                <p class="text-white/70 text-lg">© 2026 AbilityJobs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

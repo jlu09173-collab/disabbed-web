@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Jobs - AbilityJobs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #008CA7 0%, #2ECC71 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .filter-sidebar { max-height: calc(100vh - 200px); overflow-y: auto; }
+        .filter-sidebar::-webkit-scrollbar { width: 6px; }
+        .filter-sidebar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .filter-sidebar::-webkit-scrollbar-thumb { background: #008CA7; border-radius: 10px; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .job-card { animation: slideIn 0.4s ease-out; }
+        .pattern-dots { background-image: radial-gradient(circle, rgba(0, 140, 167, 0.1) 1px, transparent 1px); background-size: 20px 20px; }
+    </style>
+</head>
+<body class="bg-[#F5F7FA]" data-authenticated="{{ user.is_authenticated|yesno:'true,false' }}">
+    <!-- Top Bar -->
+    <div class="bg-gradient-to-r from-[#008CA7] to-[#006B82] text-white py-3 px-6 text-center text-sm font-medium">
+        <span>🔥 5,234 New Jobs Posted This Week | 📊 98% Success Rate | 🎯 AI-Powered Matching</span>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50 border-b-2 border-[#008CA7]/10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center hover-scale">
+                    <div class="w-44 h-16 rounded-xl overflow-hidden shadow-lg hover:scale-110 transition duration-300">
+                        <img src="images/logo.png" alt="AbilityJobs Logo" class="w-full h-full object-cover">
+                    </div>
+                </a>
+                <div class="flex items-center gap-8">
+                    <a href="index.html" class="text-[#222222] hover:text-[#008CA7] font-medium transition-colors">Home</a>
+                    <a href="jobs.html" class="text-[#008CA7] font-bold border-b-3 border-[#008CA7] pb-1">Jobs</a>
+                    <a href="employer-dashboard.html" class="text-[#222222] hover:text-[#008CA7] font-medium transition-colors">Employers</a>
+                    <a href="ngos.html" class="text-[#222222] hover:text-[#008CA7] font-medium transition-colors">NGOs</a>
+                    {% if user.is_authenticated %}
+                    <a href="profile.html" class="text-[#222222] hover:text-[#008CA7] font-medium transition-colors">Dashboard</a>
+                    <a href="logout/" class="bg-gradient-to-r from-[#e74c3c] to-[#c0392b] text-white px-7 py-3 rounded-xl font-bold hover:shadow-2xl transition-all">Logout</a>
+                    {% else %}
+                    <a href="login.html" class="text-[#222222] hover:text-[#008CA7] font-medium transition-colors">Login</a>
+                    <a href="register.html" class="bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white px-7 py-3 rounded-xl font-bold hover:shadow-2xl transition-all">Get Started</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Hero -->
+    <section class="bg-gradient-to-br from-[#008CA7] via-[#00a8c9] to-[#2ECC71] py-20 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 pattern-dots opacity-20"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-10">
+                <h1 class="text-6xl lg:text-7xl font-black text-white mb-6 leading-tight drop-shadow-2xl">
+                    Find Your Dream Job
+                </h1>
+                <p class="text-2xl text-white/95 font-medium">Browse 5,234 inclusive opportunities from verified employers</p>
+            </div>
+            
+            <!-- Advanced Search Bar -->
+            <div class="max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl p-6">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                    <div class="md:col-span-5">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Job Title or Keyword</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <svg class="w-6 h-6 text-[#008CA7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                            </div>
+                            <input type="text" placeholder="e.g., Data Entry, Designer" class="w-full h-16 pl-14 pr-4 border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#008CA7] focus:border-transparent text-lg">
+                        </div>
+                    </div>
+                    <div class="md:col-span-4">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Location</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <svg class="w-6 h-6 text-[#008CA7]" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <input type="text" placeholder="City or State" class="w-full h-16 pl-14 pr-4 border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#008CA7] focus:border-transparent text-lg">
+                        </div>
+                    </div>
+                    <div class="md:col-span-3">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">&nbsp;</label>
+                        <button class="w-full h-16 bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white rounded-2xl font-black text-lg hover:shadow-2xl transition-all">
+                            Search Jobs
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Filter Tags -->
+            <div class="max-w-5xl mx-auto mt-8 flex flex-wrap gap-4 justify-center">
+                <button class="bg-white/20 backdrop-blur-xl border-2 border-white/40 text-white px-6 py-3 rounded-full hover:bg-white hover:text-[#008CA7] transition-all font-bold text-lg">
+                    🏠 Remote Only
+                </button>
+                <button class="bg-white/20 backdrop-blur-xl border-2 border-white/40 text-white px-6 py-3 rounded-full hover:bg-white hover:text-[#008CA7] transition-all font-bold text-lg">
+                    ⏰ Full-time
+                </button>
+                <button class="bg-white/20 backdrop-blur-xl border-2 border-white/40 text-white px-6 py-3 rounded-full hover:bg-white hover:text-[#008CA7] transition-all font-bold text-lg">
+                    💼 Entry Level
+                </button>
+                <button class="bg-white/20 backdrop-blur-xl border-2 border-white/40 text-white px-6 py-3 rounded-full hover:bg-white hover:text-[#008CA7] transition-all font-bold text-lg">
+                    🎨 Creative
+                </button>
+                <button class="bg-white/20 backdrop-blur-xl border-2 border-white/40 text-white px-6 py-3 rounded-full hover:bg-white hover:text-[#008CA7] transition-all font-bold text-lg">
+                    💻 IT/Tech
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-12 gap-8">
+                <!-- Filters Sidebar -->
+                <aside class="col-span-12 lg:col-span-3">
+                    <div class="bg-white rounded-3xl shadow-xl p-8 sticky top-28 filter-sidebar border-2 border-gray-100">
+                        <div class="flex items-center justify-between mb-8">
+                            <h3 class="text-2xl font-black text-[#222222]">Filters</h3>
+                            <button class="text-[#008CA7] text-sm font-bold hover:text-[#2ECC71] transition-colors">Clear All</button>
+                        </div>
+
+                        <!-- Job Type -->
+                        <div class="mb-8 pb-8 border-b-2 border-gray-100">
+                            <h4 class="font-black text-[#222222] mb-4 text-lg">Job Type</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" class="w-6 h-6 text-[#008CA7] rounded border-2 border-gray-300 focus:ring-2 focus:ring-[#008CA7]">
+                                    <span class="text-[#222222]/80 group-hover:text-[#008CA7] transition-colors font-medium">Full-time <span class="text-gray-400">(2,345)</span></span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" class="w-6 h-6 text-[#008CA7] rounded border-2 border-gray-300 focus:ring-2 focus:ring-[#008CA7]">
+                                    <span class="text-[#222222]/80 group-hover:text-[#008CA7] transition-colors font-medium">Part-time <span class="text-gray-400">(1,234)</span></span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" class="w-6 h-6 text-[#008CA7] rounded border-2 border-gray-300 focus:ring-2 focus:ring-[#008CA7]">
+                                    <span class="text-[#222222]/80 group-hover:text-[#008CA7] transition-colors font-medium">Contract <span class="text-gray-400">(567)</span></span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" class="w-6 h-6 text-[#008CA7] rounded border-2 border-gray-300 focus:ring-2 focus:ring-[#008CA7]">
+                                    <span class="text-[#222222]/80 group-hover:text-[#008CA7] transition-colors font-medium">Freelance <span class="text-gray-400">(890)</span></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Work Mode -->
+                        <div class="mb-8 pb-8 border-b-2 border-gray-100">
+                            <h4 class="font-black text-[#222222] mb-4 text-lg">Work Mode</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" class="w-6 h-6 text-[#008CA7] rounded border-2 border-gray-300 focus:ring-2 focus:ring-[#008CA7]">
+                                    <span class="text-[#222222]/80 group-hover:text-[#008CA7] transition-colors font-medium">Remote <span class="text-gray-400">(1,890)</span></span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" class="w-6 h-6 text-[#008CA7] rounded border-2 border-gray-300 focus:ring-2 focus:ring-[#008CA7]">
+                                    <span class="text-[#222222]/80 group-hover:text-[#008CA7] transition-colors font-medium">On-site <span class="text-gray-400">(2,100)</span></span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" class="w-6 h-6 text-[#008CA7] rounded border-2 border-gray-300 focus:ring-2 focus:ring-[#008CA7]">
+                                    <span class="text-[#222222]/80 group-hover:text-[#008CA7] transition-colors font-medium">Hybrid <span class="text-gray-400">(1,010)</span></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Experience Level -->
+                        <div class="mb-8 pb-8 border-b-2 border-gray-100">
+                            <h4 class="font-black text-[#222222] mb-4 text-lg">Experience Level</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" class="w-6 h-6 text-[#008CA7] rounded border-2 border-gray-300 focus:ring-2 focus:ring-[#008CA7]">
+                                    <span class="text-[#222222]/80 group-hover:text-[#008CA7] transition-colors font-medium">Entry Level <span class="text-gray-400">(1,500)</span></span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" class="w-6 h-6 text-[#008CA7] rounded border-2 border-gray-300 focus:ring-2 focus:ring-[#008CA7]">
+                                    <span class="text-[#222222]/80 group-hover:text-[#008CA7] transition-colors font-medium">Mid Level <span class="text-gray-400">(2,000)</span></span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" class="w-6 h-6 text-[#008CA7] rounded border-2 border-gray-300 focus:ring-2 focus:ring-[#008CA7]">
+                                    <span class="text-[#222222]/80 group-hover:text-[#008CA7] transition-colors font-medium">Senior Level <span class="text-gray-400">(1,000)</span></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Salary Range -->
+                        <div class="mb-6">
+                            <h4 class="font-black text-[#222222] mb-4 text-lg">Salary Range</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" class="w-6 h-6 text-[#008CA7] rounded border-2 border-gray-300 focus:ring-2 focus:ring-[#008CA7]">
+                                    <span class="text-[#222222]/80 group-hover:text-[#008CA7] transition-colors font-medium">₹10k - ₹20k</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" class="w-6 h-6 text-[#008CA7] rounded border-2 border-gray-300 focus:ring-2 focus:ring-[#008CA7]">
+                                    <span class="text-[#222222]/80 group-hover:text-[#008CA7] transition-colors font-medium">₹20k - ₹40k</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" class="w-6 h-6 text-[#008CA7] rounded border-2 border-gray-300 focus:ring-2 focus:ring-[#008CA7]">
+                                    <span class="text-[#222222]/80 group-hover:text-[#008CA7] transition-colors font-medium">₹40k - ₹60k</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" class="w-6 h-6 text-[#008CA7] rounded border-2 border-gray-300 focus:ring-2 focus:ring-[#008CA7]">
+                                    <span class="text-[#222222]/80 group-hover:text-[#008CA7] transition-colors font-medium">₹60k+</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Job Listings -->
+                <main class="col-span-12 lg:col-span-9">
+                    <div class="flex items-center justify-between mb-8">
+                        <h2 class="text-3xl font-black text-[#222222]">
+                            <span class="gradient-text">5,234</span> Jobs Found
+                        </h2>
+                        <select class="h-14 px-6 border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#008CA7] focus:border-transparent font-bold">
+                            <option>Most Relevant</option>
+                            <option>Newest First</option>
+                            <option>Salary: High to Low</option>
+                            <option>Salary: Low to High</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Job Card 1 -->
+                        <div class="job-card bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all p-8 border-2 border-transparent hover:border-[#008CA7] group">
+                            <div class="flex items-start justify-between mb-6">
+                                <div class="flex gap-6 flex-1">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-[#008CA7] to-[#006B82] rounded-2xl flex items-center justify-center flex-shrink-0 shadow-xl group-hover:scale-110 transition-transform">
+                                        <span class="text-white font-black text-2xl">TS</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <h3 class="text-3xl font-black text-[#222222] group-hover:text-[#008CA7] transition-colors">Data Entry Operator</h3>
+                                            <span class="bg-gradient-to-r from-[#2ECC71] to-[#27ae60] text-white px-4 py-1 rounded-full text-xs font-bold">NEW</span>
+                                        </div>
+                                        <p class="text-[#222222]/80 font-bold mb-3 text-xl">TechSoft Pvt Ltd</p>
+                                        <div class="flex flex-wrap gap-3">
+                                            <span class="bg-[#008CA7]/10 text-[#008CA7] px-4 py-2 rounded-xl text-sm font-bold">Full-time</span>
+                                            <span class="bg-[#2ECC71]/10 text-[#2ECC71] px-4 py-2 rounded-xl text-sm font-bold">Remote</span>
+                                            <span class="bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-sm font-bold">Entry Level</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-4xl font-black text-[#2ECC71] mb-2">₹15,000</div>
+                                    <p class="text-[#222222]/60 font-medium">/month</p>
+                                </div>
+                            </div>
+                            <p class="text-[#222222]/70 mb-6 leading-relaxed text-lg">Looking for detail-oriented data entry operator to join our inclusive team. Flexible working hours with full accessibility support and adaptive technology provided.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-6 text-[#222222]/60 font-medium">
+                                    <span class="flex items-center gap-2">
+                                        <svg class="w-5 h-5 text-[#008CA7]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+                                        Delhi, India
+                                    </span>
+                                    <span class="flex items-center gap-2">
+                                        <svg class="w-5 h-5 text-[#008CA7]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+                                        Posted 2 days ago
+                                    </span>
+                                </div>
+                                <div class="flex gap-3">
+                                    <button class="w-14 h-14 border-2 border-gray-200 rounded-xl hover:border-[#2ECC71] hover:bg-[#2ECC71]/5 transition-all flex items-center justify-center group">
+                                        <svg class="w-6 h-6 text-gray-400 group-hover:text-[#2ECC71] group-hover:scale-125 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                        </svg>
+                                    </button>
+                                    <button onclick="handleApplyNow('Data Entry Operator')" class="px-8 py-3 bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white rounded-xl font-bold text-lg hover:shadow-xl transition-all">
+                                        Apply Now →
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Job Card 2 -->
+                        <div class="job-card bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all p-8 border-2 border-transparent hover:border-[#008CA7] group" style="animation-delay: 0.1s;">
+                            <div class="flex items-start justify-between mb-6">
+                                <div class="flex gap-6 flex-1">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-[#2ECC71] to-[#27ae60] rounded-2xl flex items-center justify-center flex-shrink-0 shadow-xl group-hover:scale-110 transition-transform">
+                                        <span class="text-white font-black text-2xl">CS</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <h3 class="text-3xl font-black text-[#222222] group-hover:text-[#008CA7] transition-colors">Graphic Designer</h3>
+                                            <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-1 rounded-full text-xs font-bold">FEATURED</span>
+                                        </div>
+                                        <p class="text-[#222222]/80 font-bold mb-3 text-xl">Creative Studio</p>
+                                        <div class="flex flex-wrap gap-3">
+                                            <span class="bg-[#008CA7]/10 text-[#008CA7] px-4 py-2 rounded-xl text-sm font-bold">Full-time</span>
+                                            <span class="bg-[#2ECC71]/10 text-[#2ECC71] px-4 py-2 rounded-xl text-sm font-bold">Hybrid</span>
+                                            <span class="bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-sm font-bold">Mid Level</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-4xl font-black text-[#2ECC71] mb-2">₹25,000</div>
+                                    <p class="text-[#222222]/60 font-medium">/month</p>
+                                </div>
+                            </div>
+                            <p class="text-[#222222]/70 mb-6 leading-relaxed text-lg">Join our creative team to design stunning visuals for digital and print media. We provide all necessary accessibility tools and adaptive software including screen magnification.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-6 text-[#222222]/60 font-medium">
+                                    <span class="flex items-center gap-2">
+                                        <svg class="w-5 h-5 text-[#008CA7]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+                                        Pune, India
+                                    </span>
+                                    <span class="flex items-center gap-2">
+                                        <svg class="w-5 h-5 text-[#008CA7]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+                                        Posted 1 day ago
+                                    </span>
+                                </div>
+                                <div class="flex gap-3">
+                                    <button class="w-14 h-14 border-2 border-gray-200 rounded-xl hover:border-[#2ECC71] hover:bg-[#2ECC71]/5 transition-all flex items-center justify-center group">
+                                        <svg class="w-6 h-6 text-gray-400 group-hover:text-[#2ECC71] group-hover:scale-125 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                        </svg>
+                                    </button>
+                                    <button onclick="handleApplyNow('Graphic Designer')" class="px-8 py-3 bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white rounded-xl font-bold text-lg hover:shadow-xl transition-all">
+                                        Apply Now →
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Job Card 3 -->
+                        <div class="job-card bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all p-8 border-2 border-transparent hover:border-[#008CA7] group" style="animation-delay: 0.2s;">
+                            <div class="flex items-start justify-between mb-6">
+                                <div class="flex gap-6 flex-1">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-purple-600 to-purple-800 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-xl group-hover:scale-110 transition-transform">
+                                        <span class="text-white font-black text-2xl">EC</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <h3 class="text-3xl font-black text-[#222222] group-hover:text-[#008CA7] transition-colors">Customer Support Executive</h3>
+                                            <span class="bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-1 rounded-full text-xs font-bold animate-pulse">URGENT</span>
+                                        </div>
+                                        <p class="text-[#222222]/80 font-bold mb-3 text-xl">Enable Corp</p>
+                                        <div class="flex flex-wrap gap-3">
+                                            <span class="bg-[#008CA7]/10 text-[#008CA7] px-4 py-2 rounded-xl text-sm font-bold">Part-time</span>
+                                            <span class="bg-[#2ECC71]/10 text-[#2ECC71] px-4 py-2 rounded-xl text-sm font-bold">Remote</span>
+                                            <span class="bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-sm font-bold">Entry Level</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-4xl font-black text-[#2ECC71] mb-2">₹18,000</div>
+                                    <p class="text-[#222222]/60 font-medium">/month</p>
+                                </div>
+                            </div>
+                            <p class="text-[#222222]/70 mb-6 leading-relaxed text-lg">Provide excellent customer service via phone, email, and chat. Complete training provided. Accessibility equipment and support available including TTY services.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-6 text-[#222222]/60 font-medium">
+                                    <span class="flex items-center gap-2">
+                                        <svg class="w-5 h-5 text-[#008CA7]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+                                        Mumbai, India
+                                    </span>
+                                    <span class="flex items-center gap-2">
+                                        <svg class="w-5 h-5 text-[#008CA7]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+                                        Posted today
+                                    </span>
+                                </div>
+                                <div class="flex gap-3">
+                                    <button class="w-14 h-14 border-2 border-gray-200 rounded-xl hover:border-[#2ECC71] hover:bg-[#2ECC71]/5 transition-all flex items-center justify-center group">
+                                        <svg class="w-6 h-6 text-gray-400 group-hover:text-[#2ECC71] group-hover:scale-125 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                        </svg>
+                                    </button>
+                                    <button onclick="handleApplyNow('Customer Support Executive')" class="px-8 py-3 bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white rounded-xl font-bold text-lg hover:shadow-xl transition-all">
+                                        Apply Now →
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        <!-- Job Card 4 -->
+                        <div class="job-card bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all p-8 border-2 border-transparent hover:border-[#008CA7] group">
+                            <div class="flex items-start justify-between mb-6">
+                                <div class="flex gap-6 flex-1">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-[#008CA7] to-[#006B82] rounded-2xl flex items-center justify-center flex-shrink-0 shadow-xl group-hover:scale-110 transition-transform">
+                                        <span class="text-white font-black text-2xl">AT</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-3xl font-black text-[#222222] group-hover:text-[#008CA7] transition-colors mb-2">Accessibility Tester</h3>
+                                        <p class="text-[#222222]/80 font-bold mb-3 text-xl">AssistiveTech Labs</p>
+                                        <div class="flex flex-wrap gap-3">
+                                            <span class="bg-[#008CA7]/10 text-[#008CA7] px-4 py-2 rounded-xl text-sm font-bold">Full-time</span>
+                                            <span class="bg-[#2ECC71]/10 text-[#2ECC71] px-4 py-2 rounded-xl text-sm font-bold">Remote</span>
+                                            <span class="bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-sm font-bold">Training Provided</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right"><div class="text-4xl font-black text-[#2ECC71] mb-2">₹28,000</div><p class="text-[#222222]/60 font-medium">/month</p></div>
+                            </div>
+                            <p class="text-[#222222]/70 mb-6 leading-relaxed text-lg">Test websites and mobile apps for accessibility issues. Screen reader knowledge is a plus, but structured training is included.</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-[#222222]/60 font-medium">Bengaluru, India · Posted today</span>
+                                <button onclick="handleApplyNow('Accessibility Tester')" class="px-8 py-3 bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white rounded-xl font-bold text-lg hover:shadow-xl transition-all">Apply Now →</button>
+                            </div>
+                        </div>
+
+                        <!-- Job Card 5 -->
+                        <div class="job-card bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all p-8 border-2 border-transparent hover:border-[#008CA7] group">
+                            <div class="flex items-start justify-between mb-6">
+                                <div class="flex gap-6 flex-1">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-[#2ECC71] to-[#27ae60] rounded-2xl flex items-center justify-center flex-shrink-0 shadow-xl group-hover:scale-110 transition-transform">
+                                        <span class="text-white font-black text-2xl">WA</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-3xl font-black text-[#222222] group-hover:text-[#008CA7] transition-colors mb-2">Website Assistant</h3>
+                                        <p class="text-[#222222]/80 font-bold mb-3 text-xl">Digital Care Services</p>
+                                        <div class="flex flex-wrap gap-3">
+                                            <span class="bg-[#008CA7]/10 text-[#008CA7] px-4 py-2 rounded-xl text-sm font-bold">Part-time</span>
+                                            <span class="bg-[#2ECC71]/10 text-[#2ECC71] px-4 py-2 rounded-xl text-sm font-bold">Hybrid</span>
+                                            <span class="bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-sm font-bold">Entry Level</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right"><div class="text-4xl font-black text-[#2ECC71] mb-2">₹16,000</div><p class="text-[#222222]/60 font-medium">/month</p></div>
+                            </div>
+                            <p class="text-[#222222]/70 mb-6 leading-relaxed text-lg">Update product pages, check forms, and support customers through email. Flexible hours and accessible workstation provided.</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-[#222222]/60 font-medium">Jaipur, India · Posted 3 days ago</span>
+                                <button onclick="handleApplyNow('Website Assistant')" class="px-8 py-3 bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white rounded-xl font-bold text-lg hover:shadow-xl transition-all">Apply Now →</button>
+                            </div>
+                        </div>
+
+                        <!-- Job Card 6 -->
+                        <div class="job-card bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all p-8 border-2 border-transparent hover:border-[#008CA7] group">
+                            <div class="flex items-start justify-between mb-6">
+                                <div class="flex gap-6 flex-1">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-[#008CA7] to-[#006B82] rounded-2xl flex items-center justify-center flex-shrink-0 shadow-xl group-hover:scale-110 transition-transform">
+                                        <span class="text-white font-black text-2xl">CC</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-3xl font-black text-[#222222] group-hover:text-[#008CA7] transition-colors mb-2">Content Coordinator</h3>
+                                        <p class="text-[#222222]/80 font-bold mb-3 text-xl">LearningBridge Foundation</p>
+                                        <div class="flex flex-wrap gap-3">
+                                            <span class="bg-[#008CA7]/10 text-[#008CA7] px-4 py-2 rounded-xl text-sm font-bold">Full-time</span>
+                                            <span class="bg-[#2ECC71]/10 text-[#2ECC71] px-4 py-2 rounded-xl text-sm font-bold">Remote</span>
+                                            <span class="bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-sm font-bold">NGO Partner</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right"><div class="text-4xl font-black text-[#2ECC71] mb-2">₹22,000</div><p class="text-[#222222]/60 font-medium">/month</p></div>
+                            </div>
+                            <p class="text-[#222222]/70 mb-6 leading-relaxed text-lg">Coordinate learning content, proofread documents, and organize training materials for inclusive education programs.</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-[#222222]/60 font-medium">Remote · Posted 4 days ago</span>
+                                <button onclick="handleApplyNow('Content Coordinator')" class="px-8 py-3 bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white rounded-xl font-bold text-lg hover:shadow-xl transition-all">Apply Now →</button>
+                            </div>
+                        </div>
+
+                    <!-- Pagination -->
+                    <div class="mt-16 flex items-center justify-center gap-3">
+                        <button class="w-14 h-14 border-2 border-gray-300 rounded-xl hover:border-[#008CA7] hover:bg-[#008CA7]/5 transition-all flex items-center justify-center font-bold">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button class="w-14 h-14 bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white rounded-xl font-black text-lg shadow-lg">1</button>
+                        <button class="w-14 h-14 border-2 border-gray-200 rounded-xl hover:border-[#008CA7] hover:bg-[#008CA7]/5 transition-all font-bold text-lg">2</button>
+                        <button class="w-14 h-14 border-2 border-gray-200 rounded-xl hover:border-[#008CA7] hover:bg-[#008CA7]/5 transition-all font-bold text-lg">3</button>
+                        <span class="px-4 text-gray-400 font-bold">...</span>
+                        <button class="w-14 h-14 border-2 border-gray-200 rounded-xl hover:border-[#008CA7] hover:bg-[#008CA7]/5 transition-all font-bold text-lg">50</button>
+                        <button class="w-14 h-14 border-2 border-gray-300 rounded-xl hover:border-[#008CA7] hover:bg-[#008CA7]/5 transition-all flex items-center justify-center font-bold">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-[#1a1a1a] to-[#2d2d2d] text-white py-16 px-6 lg:px-12 mt-16">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-gradient-to-br from-[#008CA7] to-[#2ECC71] w-12 h-12 rounded-xl flex items-center justify-center shadow-xl">
+                            <span class="text-white font-bold text-xl">AJ</span>
+                        </div>
+                        <span class="text-3xl font-black">AbilityJobs</span>
+                    </div>
+                    <p class="text-white/80 leading-relaxed text-lg">Empowering specially-abled individuals to find meaningful careers.</p>
+                </div>
+                <div>
+                    <h3 class="font-black text-xl mb-6 text-[#2ECC71]">Quick Links</h3>
+                    <div class="flex flex-col gap-4">
+                        <a href="index.html" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ Home</a>
+                        <a href="jobs.html" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ Browse Jobs</a>
+                        <a href="employer-dashboard.html" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ For Employers</a>
+                        <a href="ngos.html" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ NGO Partners</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-black text-xl mb-6 text-[#2ECC71]">Support</h3>
+                    <div class="flex flex-col gap-4">
+                        <a href="#" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ Help Center</a>
+                        <a href="#" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ Privacy Policy</a>
+                        <a href="#" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ Terms</a>
+                        <a href="#" class="text-white/70 hover:text-[#008CA7] transition-colors text-lg">→ Accessibility</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-black text-xl mb-6 text-[#2ECC71]">Contact</h3>
+                    <div class="flex flex-col gap-4 text-white/80 text-lg">
+                        <p>📧 support@abilityjobs.com</p>
+                        <p>📞 1800-XXX-XXXX</p>
+                        <p>🕒 Mon-Sat: 9AM - 6PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t-2 border-white/10 pt-8 text-center">
+                <p class="text-white/70 text-lg">© 2026 AbilityJobs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AbilityJobs JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Dashboard - AbilityJobs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #008CA7 0%, #2ECC71 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .dash-input { width: 100%; min-height: 56px; padding: 0 18px; border: 2px solid #e5e7eb; border-radius: 18px; outline: none; font-size: 16px; background: white; }
+        .dash-input:focus { border-color: #008CA7; box-shadow: 0 0 0 3px rgba(0, 140, 167, 0.14); }
+        .dash-textarea { width: 100%; padding: 16px 18px; border: 2px solid #e5e7eb; border-radius: 18px; outline: none; font-size: 16px; background: white; }
+        .dash-textarea:focus { border-color: #008CA7; box-shadow: 0 0 0 3px rgba(0, 140, 167, 0.14); }
+    </style>
+</head>
+<body class="bg-[#F5F7FA]">
+    <nav class="bg-white shadow-lg border-b-2 border-[#008CA7]/10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center">
+                    <div class="w-44 h-16 rounded-xl overflow-hidden shadow-lg">
+                        <img src="images/logo.png" alt="AbilityJobs Logo" class="w-full h-full object-cover">
+                    </div>
+                </a>
+                <div class="flex items-center gap-8">
+                    <a href="index.html" class="text-[#222222] hover:text-[#008CA7] font-medium">Home</a>
+                    <a href="jobs.html" class="text-[#222222] hover:text-[#008CA7] font-medium">Jobs</a>
+                    <a href="profile.html" class="text-[#008CA7] font-bold">Dashboard</a>
+                    <a href="logout/" class="bg-gradient-to-r from-[#e74c3c] to-[#c0392b] text-white px-7 py-3 rounded-xl font-bold">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative overflow-hidden bg-gradient-to-r from-[#008CA7] to-[#2ECC71] py-16 px-6">
+        <div class="absolute inset-0 opacity-20">
+            <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1920&q=80" alt="" class="w-full h-full object-cover">
+        </div>
+        <div class="max-w-7xl mx-auto relative z-10 text-white">
+            {% if messages %}
+                <div class="space-y-3 mb-6">
+                    {% for message in messages %}
+                        <div class="rounded-2xl px-5 py-4 font-bold bg-white/20 border-2 border-white/30">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+                <div class="flex items-center gap-8">
+                    <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-2xl overflow-hidden border-4 border-white">
+                        {% if profile.profile_photo %}
+                            <img src="{{ profile.profile_photo.url }}" alt="{{ request.user.get_full_name|default:request.user.email }} profile photo" class="w-full h-full object-cover">
+                        {% else %}
+                            <span class="text-6xl font-black text-[#008CA7]">{{ request.user.first_name|first|default:"A" }}</span>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h1 class="text-5xl font-black mb-2">{{ request.user.get_full_name|default:request.user.email }}</h1>
+                        <p class="text-xl text-white/90 font-medium">{{ request.user.email }}</p>
+                        <div class="mt-4 flex flex-wrap gap-3">
+                            <span class="bg-white/20 backdrop-blur-xl border-2 border-white/30 px-4 py-2 rounded-full font-bold">Profile Code: {{ profile.profile_code }}</span>
+                            <span class="bg-white/20 backdrop-blur-xl border-2 border-white/30 px-4 py-2 rounded-full font-bold">{{ profile.get_user_type_display }}</span>
+                            {% if profile.is_searchable %}<span class="bg-white text-[#008CA7] px-4 py-2 rounded-full font-black">Searchable</span>{% else %}<span class="bg-white/20 border-2 border-white/30 px-4 py-2 rounded-full font-bold">Private</span>{% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white/15 backdrop-blur-xl border-2 border-white/30 rounded-3xl p-6 min-w-[280px]">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="font-bold">Profile Completion</span>
+                        <span class="font-black text-3xl">{{ profile.profile_completion }}%</span>
+                    </div>
+                    <div class="h-4 bg-white/20 rounded-full overflow-hidden">
+                        <div class="h-full bg-white rounded-full" style="width: {{ profile.profile_completion }}%"></div>
+                    </div>
+                    <p class="text-white/80 mt-3">Higher completion improves recruiter ranking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <section class="lg:col-span-2 space-y-8">
+                <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-100">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                        <h2 class="text-3xl font-black text-[#222222]">Candidate Profile</h2>
+                        <button type="button" onclick="document.getElementById('editProfilePanel').scrollIntoView({behavior:'smooth'}); document.getElementById('firstNameInput').focus();" class="bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white px-7 py-3 rounded-xl font-black hover:shadow-xl transition-all">Edit Full Profile</button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-[#F5F7FA] rounded-2xl"><p class="text-sm font-bold text-gray-500">Mobile</p><p class="text-lg font-black">{{ profile.phone }}</p></div>
+                        <div class="p-4 bg-[#F5F7FA] rounded-2xl"><p class="text-sm font-bold text-gray-500">Current Location</p><p class="text-lg font-black">{{ profile.current_location|default:"Not added" }}</p></div>
+                        <div class="p-4 bg-[#F5F7FA] rounded-2xl"><p class="text-sm font-bold text-gray-500">Preferred Location</p><p class="text-lg font-black">{{ profile.preferred_location|default:"Not added" }}</p></div>
+                        <div class="p-4 bg-[#F5F7FA] rounded-2xl"><p class="text-sm font-bold text-gray-500">Disability Type</p><p class="text-lg font-black">{{ profile.disability|default:"Not added" }}</p></div>
+                        <div class="p-4 bg-[#F5F7FA] rounded-2xl md:col-span-2"><p class="text-sm font-bold text-gray-500">Skills and Keywords</p><p class="text-lg font-black">{{ profile.skills|default:"Add skills to improve recommendations" }}</p></div>
+                        <div class="p-4 bg-[#F5F7FA] rounded-2xl md:col-span-2"><p class="text-sm font-bold text-gray-500">Education</p><p class="text-lg font-black">{{ profile.education|default:"Not added" }}</p></div>
+                        {% if profile.user_type == "experienced" %}
+                            <div class="p-4 bg-[#F5F7FA] rounded-2xl md:col-span-2"><p class="text-sm font-bold text-gray-500">Employment History</p><p class="text-lg font-black">{{ profile.employment_history|default:"Not added" }}</p></div>
+                        {% endif %}
+                        <div class="p-4 bg-[#F5F7FA] rounded-2xl md:col-span-2"><p class="text-sm font-bold text-gray-500">Resume Keywords</p><p class="text-lg font-black">{{ profile.resume_keywords|default:"Upload a resume to extract keywords" }}</p></div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-100">
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                        <div>
+                            <p class="text-[#008CA7] font-black mb-2">Resume Manager</p>
+                            <h2 class="text-3xl font-black text-[#222222] mb-3">Uploaded Resume</h2>
+                            {% if profile.resume %}
+                                <p class="text-[#222222]/70 font-bold break-all">{{ profile.resume.name }}</p>
+                                {% if profile.resume_keywords %}
+                                    <p class="text-[#222222]/65 mt-3"><b>Readable keywords:</b> {{ profile.resume_keywords }}</p>
+                                {% endif %}
+                            {% else %}
+                                <p class="text-[#222222]/70 font-bold">No resume uploaded yet. Add one below to improve matching.</p>
+                            {% endif %}
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            {% if profile.resume %}
+                                <a href="{{ profile.resume.url }}" target="_blank" class="bg-[#008CA7] text-white px-7 py-3 rounded-xl font-black hover:shadow-xl transition-all">Open Resume</a>
+                            {% else %}
+                                <button type="button" disabled class="bg-gray-200 text-gray-500 px-7 py-3 rounded-xl font-black cursor-not-allowed">Open Resume</button>
+                            {% endif %}
+                            <button type="button" onclick="document.getElementById('resumeInput').click()" class="bg-white border-2 border-[#008CA7] text-[#008CA7] px-7 py-3 rounded-xl font-black hover:bg-[#008CA7] hover:text-white transition-all">Change Resume</button>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="editProfilePanel" method="post" enctype="multipart/form-data" class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-100">
+                    {% csrf_token %}
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                        <div>
+                            <p class="text-[#008CA7] font-black mb-2">Editable Dashboard</p>
+                            <h2 class="text-3xl font-black text-[#222222]">Edit Whole Profile</h2>
+                        </div>
+                        <button class="bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white px-8 py-4 rounded-xl font-black hover:shadow-xl transition-all">Save Profile</button>
+                    </div>
+
+                    {% if edit_form.errors %}
+                        <div class="rounded-2xl px-5 py-4 mb-6 bg-red-50 text-red-700 border-2 border-red-100 font-bold">
+                            {% for field, errors in edit_form.errors.items %}
+                                <p><span class="capitalize">{{ field|cut:"_" }}</span>: {{ errors|striptags }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm font-black text-[#222222] mb-2">First Name</label>
+                            <input id="firstNameInput" name="first_name" value="{{ edit_form.first_name.value|default:request.user.first_name }}" class="dash-input" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-black text-[#222222] mb-2">Last Name</label>
+                            <input name="last_name" value="{{ edit_form.last_name.value|default:request.user.last_name }}" class="dash-input">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-black text-[#222222] mb-2">Email</label>
+                            <input name="email" type="email" value="{{ edit_form.email.value|default:request.user.email }}" class="dash-input" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-black text-[#222222] mb-2">Mobile</label>
+                            <input name="phone" value="{{ edit_form.phone.value|default:profile.phone }}" class="dash-input" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-black text-[#222222] mb-2">Candidate Type</label>
+                            <select name="user_type" class="dash-input">
+                                <option value="fresher" {% if profile.user_type == "fresher" %}selected{% endif %}>Fresher</option>
+                                <option value="experienced" {% if profile.user_type == "experienced" %}selected{% endif %}>Experienced</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-black text-[#222222] mb-2">Disability Type</label>
+                            <select name="disability" class="dash-input">
+                                <option value="">Select disability type</option>
+                                <option value="prefer_not_to_say" {% if profile.disability == "prefer_not_to_say" %}selected{% endif %}>Prefer not to say</option>
+                                <option value="visual" {% if profile.disability == "visual" %}selected{% endif %}>Visual impairment</option>
+                                <option value="hearing" {% if profile.disability == "hearing" %}selected{% endif %}>Hearing impairment</option>
+                                <option value="physical" {% if profile.disability == "physical" %}selected{% endif %}>Physical disability</option>
+                                <option value="speech" {% if profile.disability == "speech" %}selected{% endif %}>Speech impairment</option>
+                                <option value="learning" {% if profile.disability == "learning" %}selected{% endif %}>Learning disability</option>
+                                <option value="mental_health" {% if profile.disability == "mental_health" %}selected{% endif %}>Mental health condition</option>
+                                <option value="multiple" {% if profile.disability == "multiple" %}selected{% endif %}>Multiple disabilities</option>
+                                <option value="other" {% if profile.disability == "other" %}selected{% endif %}>Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-black text-[#222222] mb-2">Current Location</label>
+                            <input name="current_location" value="{{ edit_form.current_location.value|default:profile.current_location }}" class="dash-input">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-black text-[#222222] mb-2">Preferred Location</label>
+                            <input name="preferred_location" value="{{ edit_form.preferred_location.value|default:profile.preferred_location }}" class="dash-input">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-black text-[#222222] mb-2">Profile Photo</label>
+                            <label class="dash-input flex items-center justify-between cursor-pointer">
+                                <span id="photoFileName" class="truncate text-[#222222]/60 font-bold">Choose new photo</span>
+                                <span class="text-[#008CA7] font-black">Upload</span>
+                                <input name="profile_photo" type="file" accept="image/*" class="hidden" data-file-label="photoFileName">
+                            </label>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-black text-[#222222] mb-2">Resume</label>
+                            <label class="dash-input flex items-center justify-between cursor-pointer">
+                                <span id="resumeFileName" class="truncate text-[#222222]/60 font-bold">{% if profile.resume %}{{ profile.resume.name }}{% else %}Choose resume{% endif %}</span>
+                                <span class="text-[#008CA7] font-black">Upload</span>
+                                <input id="resumeInput" name="resume" type="file" accept=".pdf,.doc,.docx" class="hidden" data-file-label="resumeFileName">
+                            </label>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-black text-[#222222] mb-2">Skills and Keywords</label>
+                            <textarea name="skills" rows="3" class="dash-textarea">{{ edit_form.skills.value|default:profile.skills }}</textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-black text-[#222222] mb-2">Education</label>
+                            <textarea name="education" rows="3" class="dash-textarea">{{ edit_form.education.value|default:profile.education }}</textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-black text-[#222222] mb-2">Employment History</label>
+                            <textarea name="employment_history" rows="3" class="dash-textarea">{{ edit_form.employment_history.value|default:profile.employment_history }}</textarea>
+                        </div>
+                        <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <label class="flex items-start gap-3 p-5 rounded-2xl bg-[#F5F7FA] font-bold text-[#222222]">
+                                <input name="hide_from_recruiters" type="checkbox" class="w-6 h-6 mt-1" {% if profile.hide_from_recruiters %}checked{% endif %}>
+                                Hide profile from recruiters
+                            </label>
+                            <label class="flex items-start gap-3 p-5 rounded-2xl bg-[#F5F7FA] font-bold text-[#222222]">
+                                <input name="job_alerts" type="checkbox" class="w-6 h-6 mt-1" {% if "job_alerts=on" in profile.communication_settings %}checked{% endif %}>
+                                Send job alerts and profile updates
+                            </label>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-100">
+                    <h2 class="text-3xl font-black text-[#222222] mb-8">Recommended Jobs</h2>
+                    <div class="space-y-4">
+                        {% for title, mode, level, reason in recommended_jobs %}
+                            <form method="post" action="apply/" class="p-5 bg-gradient-to-br from-white to-[#F5F7FA] rounded-2xl border-2 border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                {% csrf_token %}
+                                <input type="hidden" name="job_title" value="{{ title }}">
+                                <div>
+                                    <h3 class="text-2xl font-black text-[#222222]">{{ title }}</h3>
+                                    <p class="text-[#222222]/70 font-bold">{{ mode }} · {{ level }} · {{ reason }}</p>
+                                </div>
+                                <button class="bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white px-7 py-3 rounded-xl font-black">Apply Now</button>
+                            </form>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-100">
+                    <h2 class="text-3xl font-black text-[#222222] mb-8">My Applications</h2>
+                    {% if applications %}
+                        <div class="space-y-4">
+                            {% for app in applications %}
+                                <div class="p-5 bg-[#F5F7FA] rounded-2xl flex justify-between gap-4">
+                                    <div><h3 class="text-xl font-black">{{ app.job_title }}</h3><p class="text-[#222222]/60">Applied {{ app.applied_at|date:"M d, Y" }}</p></div>
+                                    <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-bold h-fit">{{ app.status }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-gray-500 text-lg">No applications yet. Browse jobs and apply when ready.</p>
+                    {% endif %}
+                </div>
+            </section>
+
+            <aside class="space-y-8">
+                <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-gray-100">
+                    <h3 class="text-2xl font-black text-[#222222] mb-6">Security and Controls</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between p-4 bg-[#008CA7]/5 rounded-2xl"><span>Email OTP</span><b>{{ profile.email_verified|yesno:"Done,Done" }}</b></div>
+                        <div class="flex justify-between p-4 bg-[#2ECC71]/5 rounded-2xl"><span>Mobile OTP</span><b>{{ profile.phone_verified|yesno:"Done,Done" }}</b></div>
+                        <div class="flex justify-between p-4 bg-[#008CA7]/5 rounded-2xl"><span>Recruiter Visibility</span><b>{{ profile.hide_from_recruiters|yesno:"Hidden,Visible" }}</b></div>
+                        <div class="flex justify-between p-4 bg-[#2ECC71]/5 rounded-2xl"><span>Freshness Score</span><b>{{ profile.freshness_score }}</b></div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-[#008CA7] to-[#2ECC71] rounded-3xl shadow-xl p-8 text-white">
+                    <h3 class="text-2xl font-black mb-6">Recruiter Signals</h3>
+                    <p class="text-white/85 mb-5">Last active is updated on every login so recruiters can filter recently active profiles.</p>
+                    <div class="bg-white/20 border-2 border-white/30 rounded-2xl p-4 font-bold">Last active: {{ profile.last_active_at|date:"M d, Y H:i"|default:"Just now" }}</div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <script>
+        document.querySelectorAll('input[type="file"][data-file-label]').forEach((input) => {
+            input.addEventListener('change', () => {
+                const label = document.getElementById(input.dataset.fileLabel);
+                if (label) {
+                    label.textContent = input.files.length ? input.files[0].name : label.textContent;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

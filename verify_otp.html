@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP - AbilityJobs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>body{font-family:'Open Sans',sans-serif}h1,h2{font-family:'Poppins',sans-serif}.pattern-dots{background-image:radial-gradient(circle,rgba(0,140,167,.08) 1px,transparent 1px);background-size:20px 20px}</style>
+</head>
+<body class="bg-[#F5F7FA] pattern-dots min-h-screen flex items-center justify-center px-6">
+    <div class="w-full max-w-lg bg-white rounded-3xl shadow-2xl p-10 border-2 border-gray-100">
+        <a href="index.html"><img src="images/logo.png" alt="AbilityJobs Logo" class="w-44 h-16 object-cover rounded-xl shadow-lg mb-8"></a>
+        <h1 class="text-4xl font-black text-[#222222] mb-3">Verify OTP</h1>
+        <p class="text-[#222222]/70 text-lg mb-6">Enter the 6-digit code sent through the verification service.</p>
+        {% if otp_hint %}
+            <div class="bg-[#008CA7]/10 border-2 border-[#008CA7]/20 rounded-2xl p-4 mb-6 font-bold text-[#006B82]">Development OTP: {{ otp_hint }}</div>
+        {% endif %}
+        {% if form.errors %}
+            <div class="bg-red-50 border-2 border-red-100 text-red-700 rounded-2xl p-4 mb-6 font-bold">{{ form.errors|striptags }}</div>
+        {% endif %}
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+            <input name="otp" maxlength="6" required class="w-full h-16 px-5 border-2 border-gray-200 rounded-2xl text-2xl tracking-[0.4em] font-black text-center focus:outline-none focus:ring-2 focus:ring-[#008CA7]" placeholder="000000">
+            <button class="w-full h-16 bg-gradient-to-r from-[#008CA7] to-[#2ECC71] text-white rounded-2xl font-black text-xl">Verify and Continue</button>
+        </form>
+    </div>
+</body>
+</html>
